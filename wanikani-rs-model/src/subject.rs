@@ -115,7 +115,7 @@ pub struct PronunciationAudioMetadata {
     pub pronunciation: String,
     pub voice_actor_id: i64,
     pub voice_actor_name: String,
-    pub voice_actor_description: String,
+    pub voice_description: String,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -146,10 +146,30 @@ pub struct SubjectVocabulary {
     pub reading_mnemonic: String,
 }
 
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct SubjectKanaVocabulary {
+    pub context_sentences: Vec<Sentence>,
+    pub meaning_mnemonic: String,
+    pub parts_of_speech: Vec<String>,
+    pub pronunciation_audios: Vec<PronunciationAudio>,
+    pub created_at: DateTime<Utc>,
+    pub level: i64,
+    pub slug: String,
+    pub hidden_at: Option<DateTime<Utc>>,
+    pub document_url: String,
+    pub characters: String,
+    pub meanings: Vec<Meaning>,
+    pub auxiliary_meanings: Vec<AuxiliaryMeaning>,
+    pub lesson_position: i64,
+    pub spaced_repetition_system_id: i64,
+}
+
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(untagged)]
 pub enum Subject {
     Radical(SubjectRadical),
     Kanji(SubjectKanji),
     Vocabulary(SubjectVocabulary),
+    KanaVocabulary(SubjectKanaVocabulary),
 }
